@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex1</title>
+    <link rel="stylesheet" href="./fontawesome-free-5.15.1-web/css/all.css">
+    <style>
+         :root{
+            --mainColor :rgb(212 90 32);
+            --mainBg : #373737;
+        }
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .LandingPage{
+           min-height: 100vh;
+           background-image: url("img1.jpg");
+             background-size: cover;
+           
+                  }
+        .menu{
+            display: grid;
+            grid-template-columns: 1fr 5fr 3fr;
+            align-items: center;
+            background-color: var(--mainBg);
+            /*position: fixed;*/
+            
+        }
+        .menu .logo img{
+            width: 125px;
+            height: 65px;
+        }
+
+        .menu .links ul{
+            display: inline-block;
+            list-style: none;
+            align-content: right;
+            padding: 5px 15px;
+        }
+
+        .menu .links ul li{
+            display: inline-block;
+            margin-right: 8px;
+            padding: 3px 5px;
+        }
+
+        .menu .links ul li:hover, .menu .links ul li.active{
+            background-color: var(--mainColor);
+        }
+        .menu .links ul li a{
+            text-decoration: none;
+            color:rgb(218, 210, 210);
+        }
+
+        .menu i{
+            font-size: 20px;
+            color: var(--mainColor);
+            display: none;
+        }
+
+          @media (max-width: 800px) {
+   
+          .menu .logo img{
+        width: 85px;
+        height: 35px;
+          }
+
+        .menu .links{
+        display: none;
+       
+      }
+
+      .menu .links ul li{
+        display: block;
+        margin-right: 8px;
+        padding: 3px 5px;
+     }
+
+     .menu .links ul li:hover, .menu .links ul li.active{
+        background-color: var(--mainColor);
+     }
+     .menu .links ul li a{
+        text-decoration: none;
+        color:rgb(218, 210, 210);
+     }
+
+     .menu i{
+        font-size: 20px;
+        color: var(--mainColor);
+        display: inline;
+        grid-column: 3;
+        grid-row: 1;
+        align-self: center;
+        justify-self: end;
+        margin-right: 15px;
+     }
+
+     .disp{
+        display: inline-block;
+        grid-row: 2;
+        grid-column: 1;
+       }
+          }
+    </style>
+</head>
+<body>
+    <div class="LandingPage">
+    <div class="menu">
+        <div class="logo">
+            <a href="#"><img src="./5.png" ></a>
+        </div>
+        <div></div>
+        <div class="links">
+            <ul>
+                <li  class="active"><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+</div>
+
+
+</body>
+<script>
+    let bi =document.querySelector("i");
+    let bul = document.querySelector(".links");
+    bi.onclick= function(){
+        if(bul.classList.contains("disp")==true){
+            bul.classList.remove("disp");
+            bul.style.display = "none";
+        }
+        else{
+            bul.classList.add("disp");
+            bul.style.display = "inline-block";
+        }
+        console.log("click on i");
+    }
+</script>
+</html>

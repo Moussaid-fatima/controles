@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex2</title>
+    <link rel="stylesheet" href="./fontawesome-free-5.15.1-web/css/all.css">
+    <style>
+        .main{
+    border: 2px solid gray;
+    position: relative;
+    top:120px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap:10px;
+}
+.main .fr{
+    border:1px solid blue;
+    font-size: 18px;
+    font-weight: bold;
+    color : red;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+}
+.main .us{
+    border: 1px solid red;
+    font-size: 18px;
+    font-weight: bold;
+    color : blue;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+}
+.main .fr div{
+    border: 1px solid red;
+}
+.main .us div{
+    border: 1px solid blue;
+}
+
+.main .commandes{
+    grid-column: 1 /span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
+#timer{
+    background-color: black;
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+    height: 50px;
+}
+#sbtn{
+    background-color: red;
+    color: yellow;
+    font-weight: bold;
+    font-size: 18px;
+    height: 50px;
+}
+#score{
+    background-color: yellow;
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+    height: 50px;
+}
+    </style>
+    </head>
+    <body>
+        <div class="main">
+            <div class="fr"></div>
+            <div class="us"></div>
+            <div class="commandes">
+                <input id='timer' type="text" value="00:00" readonly>
+                <input id='sbtn' type="button" value="Start" onclick="Start()">
+                <input id='score' value="00.00/100" readonly>
+                
+        
+            </div>
+        </div>
+    </body>
+    <script>
+        let tfr=["Pigmentation","Ordinateur","Architecture","Voiture","Commande","Arbre","Collaborateur","Ecran","Image"],
+        tus=["Pigmentation","Ordinateur","Architecture","Voiture","Commande","Arbre","Collaborateur","Ecran","Image"];
+        let divFR = document.querySelector(".fr");
+        let divus = document.querySelector(".us");
+
+ 
+        let min=0, s=0;
+        let timer = document.querySelector("#timer");
+        let timeR =null;
+        function timechage()
+        {
+            min=(s==59)? min+1:min;
+            s=(s==59)? 0: s+1;
+            mm = (min>9) ? min : "0"+min;
+            ss = (s>9) ? s : "0"+s;
+            timer.value=mm+" : "+ss;
+        }
+
+
+        function Start(){
+            clearInterval(timeR);
+            min=0; 
+            s=0;
+            timeR = setInterval(timechage, 1000);
+
+
+            divFR.innerHTML="";
+        let listFr=[], listUS=[];
+        while(listFr.length<tfr.length){
+            let ifr = Math.floor((Math.random()*9));
+            if(listFr.indexOf(ifr)==-1){
+            let xfr = document.createElement("div");
+            xfr.id="f"+ifr;
+            xfr.draggable=true;
+            xfr.innerText=tfr[ifr];
+            xfr.ondragstart=dragS;
+            xfr.ondragover= dragO;
+            xfr.ondrop= dropp;
+            divFR.appendChild(xfr);
+            listFr.push(ifr);
+            }                
+        }
+
+        divus.innerHTML="";
+        
+        while(listUS.length<tus.length){
+            let ius = Math.floor((Math.random()*9));
+            if(listUS.indexOf(ius)==-1){
+            let xus = document.createElement("div");
+            xus.id="u"+ius;
+            xus.draggable=true;
+            xus.ondragstart=dragS;
+            xus.ondragover= dragO;
+            xus.ondrop= dropp;
+            xus.innerText=tus[ius];
+            divus.appendChild(xus);
+            listUS.push(ius);
+            }                
+        }
+    }
+
+    function dragS(){
+        let id = event.target.id;
+        event.dataTransfer.setData("k1",id);
+        console.log(event.dataTransfer.getData("k1"));
+    }
+
+    function dragO(){
+        event.preventDefault();
+    }
+    function dropp(){
+        var idOld = event.dataTransfer.getData("k1");
+        var idnew = event.target.id;
+        if(idOld.substring(1,idOld.length) ==idnew.substring(1,idOld.length) && idOld!=idnew)
+        {
+            var x = document.querySelector("#"+idOld);
+            x.style.display="none";
+            event.target.style.display="none";
+        }  
+    }
+    
+    </script>
+    </html>

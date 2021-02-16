@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exam JS</title>
+</head>
+<script>
+function Add1(){
+            var sel = document.querySelector(".ligne2 > select");
+            var tb=document.getElementById("txtCat");
+            var _new = document.createElement('option');
+            var monObj = document.createTextNode(tb.value);
+            _new.appendChild(monObj);
+            var test =-1;
+            if(tb.value != "")
+            {
+                for(i=0;i<sel.children.length; i++)
+            {
+                if(sel.children[i].innerText==tb.value)
+                {
+                    test=i;
+                    break;
+                }
+            }
+            if(test==-1)
+            { 
+                sel.appendChild(_new);
+                sel.insertBefore(_new,sel.children[0]);
+                alert(tb.value+"\nBien Ajouter");
+                tb.focus();
+            }
+            else
+            {
+                alert(tb.value+"\ndeja existe");
+                tb.focus();
+            }
+            }
+            else
+            {
+                alert("merci de remplire le chemp");
+            }
+            
+        }
+
+        function removeCat(){
+            var sel = document.querySelector(".ligne2 > select");
+            var tb=document.getElementById("txtCat");
+            
+            var test =-1;
+            for(i=0;i<sel.children.length; i++)
+            {
+                if(sel.children[i].innerText==tb.value)
+                {
+                    test=i;
+                    break;
+                }
+            }
+            if(test!=-1)
+            {
+                sel.removeChild(sel.children[test]);
+                alert(tb.value+"\nBien Supprimer de la liste categories");
+                tb.value="";
+                tb.focus();
+            }
+            else
+            {
+                alert(tb.value+" introuvable");
+                tb.focus();
+            }
+            
+        }
+        function myF(){
+            var sel = document.querySelector(".ligne2 > select");
+            var tb=document.getElementById("txtCat");
+            var x = document.getElementById("catListe").selectedIndex;
+            tb.value=sel.children[x].innerText;
+        }
+
+        function addTache(){
+            
+            var div3 = document.querySelector(".ligne3");
+            var tb2=document.getElementById("addElem1");
+
+            var divTache = document.createElement('div');
+            divTache.className="divTache";
+
+            var input1 = document.createElement('input');
+            input1.id="txtF";
+            input1.readOnly=true;
+            var input2 = document.createElement('input');
+            input2.type="button";
+            input2.id="btnEdite"
+            var input3 = document.createElement('input');
+            input3.type="button";
+            input3.id="btnRem";
+            var input4 = document.createElement('input');
+            var input5 = document.createElement('input');
+            input4.type="checkbox";
+            input5.type="checkbox";
+            input4.name="checkbox1";
+            input5.name="checkbox1";
+            div3.appendChild(divTache);
+            divTache.style.justifyContent="space-between";
+            divTache.appendChild(input1);
+            divTache.appendChild(input2);
+            divTache.appendChild(input3);
+            divTache.appendChild(input4);
+            divTache.appendChild(input5);
+            //var li=document.querySelector("#linge3").innerHTML+="<div class='row' style='width: 100%;height: 20%;display: flex;flex-direction: row;align-items: center;justify-content: space-between;'><input type='text' id='txt2'><input type='button' value='+'><input type='button' value='*'><input type='checkbox'><input type='checkbox'></div>"
+        }
+
+</script>
+
+
+<style>
+*{
+    padding: 0;
+    margin:0;
+}
+.ligne3{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+body{
+    margin:30px;
+}
+.main{
+    position: relative;
+    margin-left: 8%;
+    width: 80%;
+    height: 40%;
+    padding: 20px;
+    background-color: lightslategray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.txt1{
+            font-weight: 700;
+            color: darkslategrey;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: none;
+            border-radius: 25px;
+            background : linear-gradient(#c7fdca, #c4cec4);;
+            width: 300px;
+            height: 30px;
+            padding-left:10px;
+}
+.txt2{
+            font-weight: 700;
+            color: darkslategrey;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: none;
+            border-radius: 25px;
+            background : linear-gradient(#c7fdca, #c4cec4);;
+            width: 450px;
+            height: 30px;
+            padding-left:10px;
+}
+.listeCate1{
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background : linear-gradient(#c7fdca, #05c705);;
+            width: 350px;
+            height: 30px;
+}
+.btn1{
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            background : linear-gradient(#c7fdca, #05c705);;
+            width: 100px;
+            height: 30px;
+}
+.btn2{
+            cursor: pointer;
+            border: none;
+            border-radius: 50%;
+            background-color:#05c705;
+            width: 50px;
+            height: 50px;
+}
+.btn1:hover{
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(#05c705,#c7fdca);;
+            width: 100px;
+            height: 30px;
+}
+.btn2:hover{
+            cursor: pointer;
+            border: none;
+            border-radius: 50%;
+            background: linear-gradient(#05c705,#c7fdca);;
+            width: 50px;
+            height: 50px;
+}
+</style>
+<body>
+    <!--Div main qui contient tous les div-->
+    <div class="main">
+        <!-- La ligne 1 -->
+        <div class="ligne1">
+            <input class="txt1" type="text" id="txtCat" placeholder="Tappez Nouvelle Categorie">
+            <input class="btn1" type="button" value="+" id="btnAddCat" onclick="Add1()" name="btn">
+            <input class="btn1" type="button" value="x" id="btnremoveCat" onclick="removeCat()" name="btn">
+            <input class="btn1" type="button" value="Save" id="btnSave" name="btn"><br>
+
+            
+        </div>
+
+        <!-- La ligne 2 -->
+        <div class="ligne2">
+            <input class="txt2" type="text" id="txtElement">
+            <select class="listeCate1" name="categories" id="catListe" onchange="myF()">
+            </select>
+            <input class="btn2" type="button" value="+" id="addElem1" name="btn" onclick="addTache()">
+            <input class="btn2" type="button" value="+" id="addElem2" name="btn">
+        </div>
+
+        <!--La ligne 3 -->
+
+        <div class="ligne3" id="linge3">
+    </div>
+    </div>
+</body>
+</html>
